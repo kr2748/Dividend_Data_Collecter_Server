@@ -211,3 +211,47 @@ FAIL
   "resultCode":101  
 }
 ```
+
+***
+
+### 재무정보 가져오기 
+
+```
+GET /rest/getFinanceInfo
+```
+
+- request 
+```
+{
+  "ticker" : "ko",
+}
+```
+
+- response 
+```
+SUCCESS
+{
+    "result_code": "200",
+    "reason": "success",
+    "data": {
+        "PER": "19.88",
+        "EPS(ttm)": "2.32",
+        "PBR": "10.90",
+        "ROE": "54.10%",
+        "ROA": "11.20%",
+        "PCR": "11.05",
+        "BETA": "0.54",
+        "Employees": "86200",
+        "RecentNewsTitle": "Jul-21-20 09:45AM\u00a0\u00a0Dow's 275-point rally highlighted by gains in shares of Exxon Mobil, Coca-Cola MarketWatch",
+        "RecentNewsLink": "https://www.marketwatch.com/story/dows-275-point-rally-highlighted-by-gains-in-shares-of-exxon-mobil-coca-cola-2020-07-21?siteid=yhoof2"
+    }
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+```
+
