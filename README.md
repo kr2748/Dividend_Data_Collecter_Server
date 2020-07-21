@@ -10,14 +10,15 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 종가이력 구하기
 - [x] 뉴스 구하기
 - [ ] 이번주에 배당락 혹은 배당 주는 주식 구하기
-- [ ] 재무정보 구하기
-- [ ] 배당킹 리스트
-- [ ] 배당귀족 리스트
+- [x] 재무정보 구하기
+- [x] 배당킹 리스트
+- [x] 배당귀족 리스트
 - [ ] 원달러 환율
 
 ***
 
 ### 배당 이력 가져오기
+Test URL : http://15.164.248.209:20000/rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020
 
 ```
 GET /rest/getDividendHistory
@@ -57,6 +58,7 @@ FAIL
 ***
 
 ### 종가 이력 가져오기
+Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?ticker=ko&start_year=1980&end_year=2020
 
 ```
 GET /rest/getClosePriceHistory
@@ -97,6 +99,7 @@ FAIL
 ***
 
 ### 뉴스 가져오기 
+Test URL : http://15.164.248.209:20000/rest/getNewsByTicker?ticker=ko
 
 ```
 GET /rest/getNewsByTicker
@@ -215,6 +218,7 @@ FAIL
 ***
 
 ### 재무정보 가져오기 
+Test URL : http://15.164.248.209:20000/rest/getFinanceInfo?ticker=ko
 
 ```
 GET /rest/getFinanceInfo
@@ -255,3 +259,148 @@ FAIL
 }
 ```
 
+### 배당킹 티커 리스트 가져오기 
+Test URL : http://15.164.248.209:20000/rest/getDividendKingTickerList
+
+```
+GET /rest/getDividendKingTickerList
+```
+
+- request 
+```
+{
+
+}
+```
+
+- response 
+```
+SUCCESS
+{
+  "data": [
+    "AWR", 
+    "DOV", 
+    "NWN", 
+    "EMR", 
+    "GPC", 
+    "PG", 
+    "PH", 
+    "MMM", 
+    "CINF", 
+    "JNJ", 
+    "KO", 
+    "LANC", 
+    "LOW", 
+    "FMCB", 
+    "CL", 
+    "NDSN", 
+    "HRL", 
+    "ABM", 
+    "CWT", 
+    "TR", 
+    "FRT", 
+    "SCL", 
+    "SJW", 
+    "SWK", 
+    "TGT", 
+    "CBSH", 
+    "MO", 
+    "SYY", 
+    "FUL"
+  ], 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+```
+
+
+### 배당귀족 티커 리스트 가져오기 
+Test URL : http://15.164.248.209:20000/rest/getDividendAristocratsList
+
+```
+GET /rest/getDividendAristocratsList
+```
+
+- request 
+```
+{
+
+}
+```
+
+- response 
+```
+SUCCESS
+{
+  "data": [
+    "GPC", 
+    "DOV", 
+    "EMR", 
+    "PG", 
+    "MMM", 
+    "CINF", 
+    "KO", 
+    "JNJ", 
+    "LOW", 
+    "CL", 
+    "HRL", 
+    "TGT", 
+    "SWK", 
+    "SYY", 
+    "BDX", 
+    "LEG", 
+    "PPG", 
+    "GWW", 
+    "KMB", 
+    "PEP", 
+    "VFC", 
+    "ABBV", 
+    "NUE", 
+    "SPGI", 
+    "ABT", 
+    "WMT", 
+    "ED", 
+    "ITW", 
+    "ADM", 
+    "ADP", 
+    "WBA", 
+    "MCD", 
+    "PNR", 
+    "CLX", 
+    "MDT", 
+    "SHW", 
+    "BEN", 
+    "AFL", 
+    "CTAS", 
+    "XOM", 
+    "BF.B", 
+    "ATO", 
+    "T", 
+    "TROW", 
+    "MKC", 
+    "CAH", 
+    "CVX", 
+    "GD", 
+    "ECL", 
+    "LIN", 
+    "PBCT", 
+    "ROP", 
+    "O", 
+    "AOS", 
+    "CAT", 
+    "CB", 
+    "RTX", 
+    "OTIS", 
+    "CARR", 
+    "ESS", 
+    "EXPD", 
+    "ROST", 
+    "ALB", 
+    "AMCR"
+  ], 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+```
