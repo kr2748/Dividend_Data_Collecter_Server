@@ -6,7 +6,7 @@
 http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko
 
 
-### 서버 형태로 제작중인 API리스트 
+### API리스트 
 - [x] 배당 이력 가져오기
 - [ ] 종가이력 구하기
 - [ ] 뉴스 구하기
