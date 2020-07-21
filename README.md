@@ -94,3 +94,120 @@ FAIL
 }
 ```
 
+***
+
+### 뉴스 가져오기 
+
+```
+GET /rest/getNewsByTicker
+```
+
+- request 
+```
+{
+  "ticker" : "ko",
+}
+```
+
+- response 
+```
+SUCCESS
+{
+    "result_code": "200",
+    "description": "success",
+    "data": {
+        "news1": {
+            "news_url": "https://www.youtube.com/watch?v=achKqtU2FYU",
+            "image_url": "https://cdn.snapi.dev/images/v1/r/4/technician-has-one-name-you-should-buy-and-one-you-should-sell-into-earnings.jpg",
+            "title": "Technician has one name you should buy and one you should sell into earnings",
+            "text": "Cornerstone Macro's Carter Worth has earnings winners and losers.",
+            "source_name": "CNBC Television",
+            "date": "Mon, 20 Jul 2020 18:14:45 -0400",
+            "topics": [
+                "tanalysis"
+            ],
+            "sentiment": "Neutral",
+            "type": "Video",
+            "tickers": [
+                "KO",
+                "SHW"
+            ],
+            "title_ko": "\uae30\uc220\uc790\ub294 \ud558\ub098\uc758 \uc774\ub984\uc744 \uc0ac\uc57c\ud558\uace0 \ub2e4\ub978 \ud558\ub098\ub294 \uc218\uc785\uc73c\ub85c \ud314\uc544\uc57c\ud569\ub2c8\ub2e4"
+        },
+        "news2": {
+            "news_url": "https://www.fool.com/investing/2020/07/20/dow-jones-lags-as-microsoft-stock-surges-coca-cola.aspx",
+            "image_url": "https://cdn.snapi.dev/images/v1/z/4/urlhttps3a2f2fgfoolcdncom2feditorial2fimages2f5292312fgettyimages-1153657433jpgw700opresize.jpg",
+            "title": "Dow Jones Lags as Microsoft Stock Surges, Coca-Cola Stock Sinks Ahead of Earnings",
+            "text": "Analysts expect solid results from Microsoft and awful results from Coca-Cola.",
+            "source_name": "The Motley Fool",
+            "date": "Mon, 20 Jul 2020 15:06:00 -0400",
+            "topics": [],
+            "sentiment": "Neutral",
+            "type": "Article",
+            "tickers": [
+                "KO",
+                "MSFT"
+            ],
+            "title_ko": "\ub2e4\uc6b0 \uc874\uc2a4, \ub9c8\uc774\ud06c\ub85c \uc18c\ud504\ud2b8 \uc99d\uad8c \uae09\ub4f1\uc73c\ub85c \ucf54\uce74\ucf5c\ub77c \uc99d\uad8c \uc2f1\ud06c\uac00 \uc55e\uc11c\uace0\uc788\ub2e4"
+        },
+        "news3": {
+            "news_url": "https://www.forbes.com/sites/adamsarhan/2020/07/20/earnings-preview-what-to-expect-from-coke-on-tuesday/",
+            "image_url": "https://cdn.snapi.dev/images/v1/8/f/earnings-preview-what-to-expect-from-coke-on-tuesday.jpg",
+            "title": "Earnings Preview: What To Expect From Coke On Tuesday",
+            "text": "Coke is expected to report $0.40/share on $8.69 billion in revenue. Meanwhile, the so-called Whisper number is $0.44.",
+            "source_name": "Forbes",
+            "date": "Mon, 20 Jul 2020 13:38:22 -0400",
+            "topics": [
+                "earnings"
+            ],
+            "sentiment": "Positive",
+            "type": "Article",
+            "tickers": [
+                "KO"
+            ],
+            "title_ko": "\uc2e4\uc801 \ubbf8\ub9ac\ubcf4\uae30 : \ud654\uc694\uc77c \ucf5c\ub77c\uc5d0\uc11c \uc608\uc0c1\ub418\ub294 \uc0ac\ud56d"
+        },
+        "news4": {
+            "news_url": "https://www.businesswire.com/news/home/20200720005144/en/Bradley-Gayton-Elected-Senior-Vice-President-General/",
+            "image_url": "https://cdn.snapi.dev/images/v1/w/2/press17.jpg",
+            "title": "Bradley Gayton Elected Senior Vice President and General Counsel of The Coca-Cola Company",
+            "text": "ATLANTA--(BUSINESS WIRE)--The Coca-Cola Company today announced that Bradley Gayton has been elected senior vice president and general counsel. He will join the company Sept.",
+            "source_name": "Business Wire",
+            "date": "Mon, 20 Jul 2020 09:00:00 -0400",
+            "topics": [
+                "PressRelease"
+            ],
+            "sentiment": "Neutral",
+            "type": "Article",
+            "tickers": [
+                "KO"
+            ],
+            "title_ko": "\ube0c\ub798\ub4e4\ub9ac \uac8c\uc774 \ud134, \ucf54\uce74\ucf5c\ub77c \ud68c\uc0ac\uc758 \uc218\uc11d \ubd80\uc0ac\uc7a5 \uacb8 \ubc95\ub960 \uace0\ubb38 \uc120\uc784"
+        },
+        "news5": {
+            "news_url": "https://www.fool.com/investing/2020/07/19/3-things-to-watch-in-the-stock-market-this-week.aspx",
+            "image_url": "https://cdn.snapi.dev/images/v1/5/p/etf39-5.jpg",
+            "title": "3 Things to Watch in the Stock Market This Week",
+            "text": "Tesla is one of several high-profile stocks set to announce earnings results over the next few trading days.",
+            "source_name": "The Motley Fool",
+            "date": "Sun, 19 Jul 2020 08:05:00 -0400",
+            "topics": [],
+            "sentiment": "Neutral",
+            "type": "Article",
+            "tickers": [
+                "IRBT",
+                "KO",
+                "TSLA"
+            ],
+            "title_ko": "\uc774\ubc88 \uc8fc \uc8fc\uc2dd \uc2dc\uc7a5\uc5d0\uc11c \ubcfc 3 \uac00\uc9c0"
+        }
+    }
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+```
