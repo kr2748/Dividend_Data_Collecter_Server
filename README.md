@@ -5,6 +5,7 @@
 
 http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko
 
+***
 
 ### API리스트 
 - [x] 배당 이력 가져오기
@@ -16,6 +17,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [ ] 배당귀족 리스트
 - [ ] 원달러 환율
 
+***
 
 ### 배당 이력 가져오기
 
@@ -54,6 +56,7 @@ FAIL
 }
 ```
 
+***
 
 ### 종가 이력 가져오기
 
