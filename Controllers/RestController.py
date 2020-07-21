@@ -7,7 +7,8 @@ import os
 import sys
 import pandas_datareader as pdr
 import json
-
+from bs4 import BeautifulSoup
+import FinanceDataReader as fdr
 
 #Response 임시 코드
 RES_FAIL = 100 #실패
@@ -20,6 +21,7 @@ class RestController(Resource):
     def get(self, service_name):
         print("[RestController]get request received! service_name : {}".format(service_name))
 
+        #배당 이력 구하기
         if service_name == "getDividendHistory":
 
             print("params : {}".format(request.args))
@@ -38,6 +40,7 @@ class RestController(Resource):
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
+        #종가 이력 구하기
         elif service_name == "getClosePriceHistory":
 
             ticker = request.args.get('ticker')
@@ -49,12 +52,39 @@ class RestController(Resource):
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
+        #뉴스 구하기
         elif service_name == "getNewsByTicker":
 
             ticker = request.args.get('ticker')
 
             if ticker != None:
                 return self.getNewsByTicker(ticker)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+        #재무정보 구하기
+        elif service_name == "getFinanceInfo":
+
+            ticker = request.args.get('ticker')
+
+            if ticker != None:
+                return self.getFinanceInfo(ticker)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+        #배당킹 구하기
+        elif service_name == "getDividendKingTickerList":
+            return self.getDividendKingTickerList()
+
+        #배당 귀족 구하기
+        elif service_name == "getDividendAristocratsList":
+            return self.getDividendAristocratsList()
+
+        elif service_name == "getKRWExchangeRate":
+            from_year = request.args.get('from_year')
+
+            if from_year != None:
+                return self.getKRWExchangeRate(from_year)
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
@@ -121,3 +151,117 @@ class RestController(Resource):
         result_dict["data"] = data
 
         return result_dict
+
+    # 재무정보 구하는 함수
+    def getFinanceInfo(self, ticker : str):
+
+        ua = UserAgent()
+        headers = {'User-Agent' : ua.random} #변경하고 싶은 user-agent 값
+
+
+        target_site_url = "https://finviz.com/quote.ashx?t={}".format(ticker)
+        res = requests.get(target_site_url, headers=headers)
+
+        dom = BeautifulSoup(res.content,'html.parser')
+
+        #없는 티커 입력시 예외처리
+        if(len(dom.select('.snapshot-td2')) < 10):
+            return {"result_code":"100","reason":"Invalid Ticker"}
+
+        #각종 지표 크롤링
+        PER = dom.select('.snapshot-td2')[1].text
+        EPS_ttm = dom.select('.snapshot-td2')[2].text
+        PBR = dom.select('.snapshot-td2')[25].text
+        ROE = dom.select('.snapshot-td2')[33].text
+        ROA = dom.select('.snapshot-td2')[27].text
+        PCR = dom.select('.snapshot-td2')[31].text
+        BETA = dom.select('.snapshot-td2')[41].text
+        Employees = dom.select('.snapshot-td2')[48].text
+
+        #뉴스 가져오기
+        recent_news_title = dom.select("#news-table")[0].select("tr")[0].text
+        recent_news_link = dom.select("#news-table")[0].select("tr")[0].select('a')[0].attrs['href']
+
+        result_data = dict()
+        result_data["PER"] = PER
+        result_data["EPS(ttm)"] = EPS_ttm
+        result_data["PBR"] = PBR
+        result_data["ROE"] = ROE
+        result_data["ROA"] = ROA
+        result_data["PCR"] = PCR
+        result_data["BETA"] = BETA
+        result_data["Employees"] = Employees
+        result_data["RecentNewsTitle"] = recent_news_title
+        result_data["RecentNewsLink"] = recent_news_link
+
+        return self.makeResultJson(RES_SUCCESS, result_data)
+
+    # 배당킹 티커 리스트 구하기
+    def getDividendKingTickerList(self) -> list:
+        ua = UserAgent()
+        headers = {'User-Agent' : ua.random} #변경하고 싶은 user-agent 값
+
+        dividend_king_url = "https://dividendvaluebuilder.com/dividend-kings-list/"
+        res = requests.get(dividend_king_url, headers=headers)
+        dom = BeautifulSoup(res.content)
+
+        dividend_kings_list_dom = dom.select('.et_pb_section_2 .et_pb_text_inner')[0]
+        dividend_kings_list_dom_items = dividend_kings_list_dom.select("p")
+
+        #이놈이 결과값이다.
+        dividend_king_ticker_list = []
+
+        for idx, item in enumerate(dividend_kings_list_dom_items):
+            #print(item.text)
+            #print("idx : {}, item :{}".format(idx, item.text))
+
+            company_name_and_ticker_txt = item.text.split("–")[0]
+            #print(item.text.split("–")[0]) #Parker Hannifin  (PH)  이 결과는 요런 형태가 나오게 된다
+            #내용 없는거랑 실제 내용 아닌거 재끼고..
+            if len(company_name_and_ticker_txt) is not 1 and company_name_and_ticker_txt[0] is not "("  :
+
+                copmany_name = company_name_and_ticker_txt.split("(")[0] #회사 풀네임
+                ticker = company_name_and_ticker_txt.split("(")[1].split(")")[0] # 티커만..
+
+                dividend_king_ticker_list.append(ticker)
+
+        return self.makeResultJson(RES_SUCCESS, dividend_king_ticker_list)
+
+    def getDividendAristocratsList(self) -> list :
+        ua = UserAgent()
+        headers = {'User-Agent': ua.random}  # 변경하고 싶은 user-agent 값
+
+        dividend_aristocrats_url = "https://dividendvaluebuilder.com/dividend-aristocrats-list/"
+        res = requests.get(dividend_aristocrats_url, headers=headers)
+        dom = BeautifulSoup(res.content)
+
+        dividend_aristocrats_list_dom = dom.select('.et_pb_section_2 .et_pb_text_inner')[0]
+        dividend_aristocrats_list_dom_items = dividend_aristocrats_list_dom.select("p")
+
+        # 이놈이 결과값이다.
+        dividend_aristocrats_ticker_list = []
+
+        for idx, item in enumerate(dividend_aristocrats_list_dom_items):
+            # print(item.text)
+            # print("idx : {}, item :{}\n".format(idx, item.text))
+
+            company_name_and_ticker_txt = item.text.split("–")[0]
+
+            # print( "updated" not in company_name_and_ticker_txt)
+            # print(item.text.split("–")[0]) #Parker Hannifin  (PH)  이 결과는 요런 형태가 나오게 된다
+            # 내용 없는거랑 실제 내용 아닌거 재끼고..
+            if len(company_name_and_ticker_txt) is not 1 and "updated" not in company_name_and_ticker_txt:
+
+                company_name = company_name_and_ticker_txt.split("(")[0]
+
+                if len(company_name_and_ticker_txt.split("(")) == 2:
+                    ticker = company_name_and_ticker_txt.split("(")[1].split(")")[0]
+                    dividend_aristocrats_ticker_list.append(ticker)
+
+        return self.makeResultJson(RES_SUCCESS, dividend_aristocrats_ticker_list)
+
+    def getKRWExchangeRate(self, fromStr : str):
+        df = fdr.DataReader('USD/KRW', fromStr)
+        res_json = json.loads(df["Close"].to_json())
+
+        return self.makeResultJson(RES_SUCCESS, res_json)
