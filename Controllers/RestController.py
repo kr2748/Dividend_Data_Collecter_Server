@@ -1,6 +1,8 @@
 from flask_restful import Resource,reqparse
 from flask import Flask, render_template, jsonify, request
+from fake_useragent import UserAgent
 
+import requests
 import os
 import sys
 import pandas_datareader as pdr
@@ -36,6 +38,26 @@ class RestController(Resource):
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
+        elif service_name == "getClosePriceHistory":
+
+            ticker = request.args.get('ticker')
+            start_year = request.args.get('start_year')
+            end_year = request.args.get('end_year')
+
+            if ticker != None and start_year != None and end_year != None:
+                return self.getClosePriceHistory(ticker, start_year, end_year)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+        elif service_name == "getNewsByTicker":
+
+            ticker = request.args.get('ticker')
+
+            if ticker != None:
+                return self.getNewsByTicker(ticker)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
     # 결과 json을 생성해주는 함수
     def makeResultJson(self, res_code : int, data : dict = dict()) -> dict:
 
@@ -60,3 +82,42 @@ class RestController(Resource):
         res_json = json.loads(df.to_json())
 
         return self.makeResultJson(RES_SUCCESS,res_json["value"])
+
+
+    # 종가이력 구하는 함수
+    def getClosePriceHistory(self, ticker : str , startYear : int , endYear : int):
+        df = pdr.DataReader(ticker, 'yahoo','{}-01-01'.format(startYear), '{}-12-30'.format(endYear))
+        return self.makeResultJson(RES_SUCCESS,json.loads(df['Close'].to_json()))
+
+    # 뉴스 구하는 함수
+    def getNewsByTicker(self, ticker : str):
+
+        print("ticker : {}".format(ticker))
+
+        ua = UserAgent()
+        headers = {'User-Agent' : ua.random} #변경하고 싶은 user-agent 값
+
+        res = requests.get("https://news.therich.io/api/stock/news?ticker={}".format(ticker), headers=headers)
+
+        if(res.status_code != 200):
+            result_dict = dict()
+            result_dict["result_code"] = "100"
+            result_dict["description"] = "Ticker is not invalid"
+            return result_dict
+
+        res_json = res.json()
+
+        news = json.loads(res_json['articles'])
+
+        result_dict = dict()
+        result_dict["result_code"] = "200"
+        result_dict["description"] = "success"
+
+        data = dict()
+
+        for idx, content in enumerate(news):
+            data["news{}".format(idx+1)] = content
+
+        result_dict["data"] = data
+
+        return result_dict
