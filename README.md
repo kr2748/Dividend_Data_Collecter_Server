@@ -8,7 +8,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 
 ### API리스트 
 - [x] 배당 이력 가져오기
-- [ ] 종가이력 구하기
+- [x] 종가이력 구하기
 - [ ] 뉴스 구하기
 - [ ] 이번주에 배당락 혹은 배당 주는 주식 구하기
 - [ ] 재무정보 구하기
@@ -53,3 +53,43 @@ FAIL
   "resultCode":101  
 }
 ```
+
+
+### 종가 이력 가져오기
+
+```
+GET /rest/getClosePriceHistory
+```
+
+- request 
+```
+{
+  "ticker" : "ko",
+  "start_year" : "1980",
+  "end_year" : "2020",
+}
+```
+
+- response 
+```
+SUCCESS
+{
+  "data": {
+    "999216000000": 24.3349990845, 
+    "999561600000": 24.75, 
+    "999648000000": 25.2250003815, 
+    "999734400000": 24.7549991608, 
+    "999820800000": 24.8649997711
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+```
+
