@@ -14,6 +14,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 배당킹 리스트
 - [x] 배당귀족 리스트
 - [x] 원달러 환율
+- [x] 검색 키워드 자동완성
 
 ***
 
@@ -58,7 +59,7 @@ FAIL
 ***
 
 ### 종가 이력 가져오기
-Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?ticker=ko&start_year=1980&end_year=2020
+Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?symbol=ko
 
 ```
 GET /rest/getClosePriceHistory
@@ -67,9 +68,7 @@ GET /rest/getClosePriceHistory
 - request 
 ```
 {
-  "ticker" : "ko",
-  "start_year" : "1980",
-  "end_year" : "2020",
+  "symbol" : "ko"
 }
 ```
 
@@ -78,12 +77,35 @@ GET /rest/getClosePriceHistory
 SUCCESS
 {
   "data": {
-    "999216000000": 24.3349990845, 
-    "999561600000": 24.75, 
-    "999648000000": 25.2250003815, 
-    "999734400000": 24.7549991608, 
-    "999820800000": 24.8649997711
-  }, 
+    "Meta Data": {
+      "1. Information": "Daily Time Series with Splits and Dividend Events", 
+      "2. Symbol": "KO", 
+      "3. Last Refreshed": "2020-07-22", 
+      "4. Output Size": "Full size", 
+      "5. Time Zone": "US/Eastern"
+    }, 
+    "Time Series (Daily)": {
+      "1999-11-01": {
+        "1. open": "58.2500", 
+        "2. high": "59.3800", 
+        "3. low": "57.8800", 
+        "4. close": "59.0000", 
+        "5. adjusted close": "16.9269", 
+        "6. volume": "4212600", 
+        "7. dividend amount": "0.0000", 
+        "8. split coefficient": "1.0000"
+      }, 
+      "1999-11-02": {
+        "1. open": "58.6300", 
+        "2. high": "58.9400", 
+        "3. low": "57.3100", 
+        "4. close": "57.7500", 
+        "5. adjusted close": "16.5683", 
+        "6. volume": "3226800", 
+        "7. dividend amount": "0.0000", 
+        "8. split coefficient": "1.0000"
+      }, 
+  },
   "description": "\uc131\uacf5", 
   "resultCode": 200
 }
@@ -411,7 +433,7 @@ SUCCESS
 ***
 
 ### 원달러 환율가져오기 
-Test URL : http://15.164.248.209:20000/rest/getKRWExchangeRate?from_year=2000
+Test URL : http://15.164.248.209:20000/rest/getKRWExchangeRate
 
 ```
 GET /rest/getKRWExchangeRate
@@ -419,9 +441,7 @@ GET /rest/getKRWExchangeRate
 
 - request 
 ```
-{
-  "from_year" : 2000
-}
+
 ```
 
 - response 
@@ -429,11 +449,147 @@ GET /rest/getKRWExchangeRate
 SUCCESS
 {
   "data": {
-    "1000080000000": 1285.0, 
-    "1000166400000": 1291.0, 
-    "1000252800000": 1284.8, 
-    "1000339200000": 1290.25, 
+    "1. From_Currency Code": "USD", 
+    "2. From_Currency Name": "United States Dollar", 
+    "3. To_Currency Code": "KRW", 
+    "4. To_Currency Name": "South Korean Won", 
+    "5. Exchange Rate": "1196.90000000", 
+    "6. Last Refreshed": "2020-07-22 22:05:50", 
+    "7. Time Zone": "UTC", 
+    "8. Bid Price": "1196.90000000", 
+    "9. Ask Price": "1197.90000000"
   }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
+### 티커 검색 
+Test URL : http://15.164.248.209:20000/rest/getRecommendKeyword?keyword=KO
+
+```
+GET /rest/getRecommendKeyword
+```
+
+- request 
+```
+{
+  "keyword" : "KO"
+}
+```
+
+- response 
+```
+SUCCESS{
+  "data": [
+    {
+      "1. symbol": "KO", 
+      "2. name": "The Coca-Cola Company", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "1.0000"
+    }, 
+    {
+      "1. symbol": "KSS", 
+      "2. name": "Kohl's Corporation", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.8000"
+    }, 
+    {
+      "1. symbol": "KOS", 
+      "2. name": "Kosmos Energy Ltd.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.8000"
+    }, 
+    {
+      "1. symbol": "KGKG", 
+      "2. name": "Kona Gold Solutions Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.6667"
+    }, 
+    {
+      "1. symbol": "PHG", 
+      "2. name": "Koninklijke Philips N.V.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.6667"
+    }, 
+    {
+      "1. symbol": "KODK", 
+      "2. name": "Eastman Kodak Company", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.4000"
+    }, 
+    {
+      "1. symbol": "KOD", 
+      "2. name": "Kodiak Sciences Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.4000"
+    }, 
+    {
+      "1. symbol": "KTB", 
+      "2. name": "Kontoor Brands Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.3333"
+    }, 
+    {
+      "1. symbol": "KORU", 
+      "2. name": "Direxion Daily South Korea Bull 3X Shares", 
+      "3. type": "ETF", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.1538"
+    }
+  ], 
   "description": "\uc131\uacf5", 
   "resultCode": 200
 }
