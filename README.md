@@ -14,7 +14,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 배당킹 리스트
 - [x] 배당귀족 리스트
 - [x] 원달러 환율
-- [ ] 검색 키워드 자동완성
+- [x] 검색 키워드 자동완성
 
 ***
 
@@ -438,6 +438,137 @@ SUCCESS
     "8. Bid Price": "1196.90000000", 
     "9. Ask Price": "1197.90000000"
   }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
+### 티커 검색 
+Test URL : http://15.164.248.209:20000/rest/getRecommendKeyword?keyword=KO
+
+```
+GET /rest/getRecommendKeyword
+```
+
+- request 
+```
+{
+  "keyword" : "KO"
+}
+```
+
+- response 
+```
+SUCCESS{
+  "data": [
+    {
+      "1. symbol": "KO", 
+      "2. name": "The Coca-Cola Company", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "1.0000"
+    }, 
+    {
+      "1. symbol": "KSS", 
+      "2. name": "Kohl's Corporation", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.8000"
+    }, 
+    {
+      "1. symbol": "KOS", 
+      "2. name": "Kosmos Energy Ltd.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.8000"
+    }, 
+    {
+      "1. symbol": "KGKG", 
+      "2. name": "Kona Gold Solutions Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.6667"
+    }, 
+    {
+      "1. symbol": "PHG", 
+      "2. name": "Koninklijke Philips N.V.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.6667"
+    }, 
+    {
+      "1. symbol": "KODK", 
+      "2. name": "Eastman Kodak Company", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.4000"
+    }, 
+    {
+      "1. symbol": "KOD", 
+      "2. name": "Kodiak Sciences Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.4000"
+    }, 
+    {
+      "1. symbol": "KTB", 
+      "2. name": "Kontoor Brands Inc.", 
+      "3. type": "Equity", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.3333"
+    }, 
+    {
+      "1. symbol": "KORU", 
+      "2. name": "Direxion Daily South Korea Bull 3X Shares", 
+      "3. type": "ETF", 
+      "4. region": "United States", 
+      "5. marketOpen": "09:30", 
+      "6. marketClose": "16:00", 
+      "7. timezone": "UTC-05", 
+      "8. currency": "USD", 
+      "9. matchScore": "0.1538"
+    }
+  ], 
   "description": "\uc131\uacf5", 
   "resultCode": 200
 }
