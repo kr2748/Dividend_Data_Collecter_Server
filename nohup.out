@@ -1,0 +1,116 @@
+ * Serving Flask app "start_crawling_svr" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:20000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-729-785
+118.36.139.123 - - [21/Jul/2020 14:42:29] "[37mGET /rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 14:52:02] "[37mGET /rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 14:52:09] "[37mGET /rest/getClosePriceHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 14:52:16] "[37mGET /rest/getNewsByTicker?ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 14:52:26] "[37mGET /rest/getFinanceInfo?ticker=ko HTTP/1.1[0m" 200 -
+/home/joorini/Projects/CrawlingSvr/Controllers/RestController.py:206: GuessedAtParserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 206 of the file /home/joorini/Projects/CrawlingSvr/Controllers/RestController.py. To get rid of this warning, pass the additional argument 'features="lxml"' to the BeautifulSoup constructor.
+
+  dom = BeautifulSoup(res.content)
+118.36.139.123 - - [21/Jul/2020 14:52:32] "[37mGET /rest/getDividendKingTickerList HTTP/1.1[0m" 200 -
+/home/joorini/Projects/CrawlingSvr/Controllers/RestController.py:236: GuessedAtParserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 236 of the file /home/joorini/Projects/CrawlingSvr/Controllers/RestController.py. To get rid of this warning, pass the additional argument 'features="lxml"' to the BeautifulSoup constructor.
+
+  dom = BeautifulSoup(res.content)
+118.36.139.123 - - [21/Jul/2020 14:52:37] "[37mGET /rest/getDividendAristocratsList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 14:52:49] "[37mGET /rest/getKRWExchangeRate?from_year=2000 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 21:24:26] "[37mGET /rest/getKRWExchangeRate?from_year=2000 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 21:24:33] "[37mGET /rest/getDividendAristocratsList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 21:24:39] "[37mGET /rest/getDividendKingTickerList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [21/Jul/2020 21:24:46] "[37mGET /rest/getFinanceInfo?ticker=ko HTTP/1.1[0m" 200 -
+175.223.33.10 - - [22/Jul/2020 02:22:51] "[37mGET /rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+221.150.92.55 - - [22/Jul/2020 09:42:11] "[37mGET /rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko HTTP/1.1[0m" 200 -
+221.150.92.55 - - [22/Jul/2020 09:42:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+221.150.92.55 - - [22/Jul/2020 10:21:10] "[37mGET /rest/getDividendAristocratsList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 11:00:38] "[37mGET /rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 11:00:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+118.36.139.123 - - [22/Jul/2020 12:35:37] "[37mGET /rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:35:45] "[37mGET /rest/getClosePriceHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:35:54] "[37mGET /rest/getNewsByTicker?ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:36:06] "[37mGET /rest/getKRWExchangeRate?from_year=2000 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:36:13] "[37mGET /rest/getDividendAristocratsList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:46:01] "[37mGET /rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:46:33] "[37mGET /rest/getNewsByTicker?ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:47:09] "[37mGET /rest/getFinanceInfo?ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 12:47:27] "[37mGET /rest/getDividendKingTickerList HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 13:13:57] "[37mGET /rest/getKRWExchangeRate?from_year=2000 HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 21:59:44] "[37mGET /rest/getNewsByTicker?ticker=ko HTTP/1.1[0m" 200 -
+118.36.139.123 - - [22/Jul/2020 21:59:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+ * Detected change in '/home/joorini/Projects/CrawlingSvr/Controllers/RestController.py', reloading
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('start_year', '1980'), ('end_year', '2020'), ('ticker', 'ko')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('ticker', 'ko'), ('start_year', '1980'), ('end_year', '2020')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getClosePriceHistory
+[RestController]get request received! service_name : getNewsByTicker
+ticker : ko
+[RestController]get request received! service_name : getFinanceInfo
+[RestController]get request received! service_name : getDividendKingTickerList
+[RestController]get request received! service_name : getDividendAristocratsList
+[RestController]get request received! service_name : getKRWExchangeRate
+[RestController]get request received! service_name : getKRWExchangeRate
+[RestController]get request received! service_name : getDividendAristocratsList
+[RestController]get request received! service_name : getDividendKingTickerList
+[RestController]get request received! service_name : getFinanceInfo
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('ticker', 'ko'), ('start_year', '1980'), ('end_year', '2020')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('start_year', '1980'), ('end_year', '2020'), ('ticker', 'ko')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getDividendAristocratsList
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('ticker', 'ko'), ('start_year', '1980'), ('end_year', '2020')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('ticker', 'ko'), ('start_year', '1980'), ('end_year', '2020')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getClosePriceHistory
+[RestController]get request received! service_name : getNewsByTicker
+ticker : ko
+[RestController]get request received! service_name : getKRWExchangeRate
+[RestController]get request received! service_name : getDividendAristocratsList
+[RestController]get request received! service_name : getDividendHistory
+params : ImmutableMultiDict([('ticker', 'ko'), ('start_year', '1980'), ('end_year', '2020')])
+[RestController]ticker : ko
+[RestController]start_year : 1980
+[RestController]end_year : 2020
+@@@@
+[RestController]get request received! service_name : getNewsByTicker
+ticker : ko
+[RestController]get request received! service_name : getFinanceInfo
+[RestController]get request received! service_name : getDividendKingTickerList
+[RestController]get request received! service_name : getKRWExchangeRate
+[RestController]get request received! service_name : getNewsByTicker
+ticker : ko

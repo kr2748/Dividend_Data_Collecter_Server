@@ -15,6 +15,7 @@ RES_FAIL = 100 #실패
 RES_FAIL_PARAM_ERR = 101 #필수 파라미터 에러
 RES_SUCCESS = 200 #성공
 
+
 class RestController(Resource):
 
     # Get 요청에 대한 콜백함수
@@ -43,12 +44,10 @@ class RestController(Resource):
         #종가 이력 구하기
         elif service_name == "getClosePriceHistory":
 
-            ticker = request.args.get('ticker')
-            start_year = request.args.get('start_year')
-            end_year = request.args.get('end_year')
+            symbol = request.args.get('symbol')
 
-            if ticker != None and start_year != None and end_year != None:
-                return self.getClosePriceHistory(ticker, start_year, end_year)
+            if symbol != None :
+                return self.getClosePriceHistory(symbol)
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
@@ -80,11 +79,17 @@ class RestController(Resource):
         elif service_name == "getDividendAristocratsList":
             return self.getDividendAristocratsList()
 
+        # 원달러 환율
         elif service_name == "getKRWExchangeRate":
-            from_year = request.args.get('from_year')
+            return self.getKRWExchangeRate()
 
-            if from_year != None:
-                return self.getKRWExchangeRate(from_year)
+        # 키워드 완성
+        elif service_name == "getRecommendKeyword":
+
+            keyword = request.args.get('keyword')
+
+            if keyword != None:
+                return self.getRecommendKeyword(keyword)
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
@@ -115,9 +120,23 @@ class RestController(Resource):
 
 
     # 종가이력 구하는 함수
-    def getClosePriceHistory(self, ticker : str , startYear : int , endYear : int):
-        df = pdr.DataReader(ticker, 'yahoo','{}-01-01'.format(startYear), '{}-12-30'.format(endYear))
-        return self.makeResultJson(RES_SUCCESS,json.loads(df['Close'].to_json()))
+
+    def getClosePriceHistory(self, symbol : str):
+
+        apikey = "ZSFBXRCOCCY81AN5"
+        req_url = "https://www.alphavantage.co/query"
+
+        params = {
+            "apikey" : apikey,
+            "symbol" : symbol,
+            "function" : "TIME_SERIES_DAILY_ADJUSTED",
+            "outputsize" : "full"
+        }
+
+        res = requests.get(req_url, params=params)
+        res_json = res.json()
+
+        return self.makeResultJson(RES_SUCCESS,res_json)
 
     # 뉴스 구하는 함수
     def getNewsByTicker(self, ticker : str):
@@ -260,8 +279,41 @@ class RestController(Resource):
 
         return self.makeResultJson(RES_SUCCESS, dividend_aristocrats_ticker_list)
 
-    def getKRWExchangeRate(self, fromStr : str):
-        df = fdr.DataReader('USD/KRW', fromStr)
-        res_json = json.loads(df["Close"].to_json())
+    def getKRWExchangeRate(self):
+        apikey = "ZSFBXRCOCCY81AN5"
+        from_currency = "USD"
+        to_currency = "KRW"
+        function = "CURRENCY_EXCHANGE_RATE"
+
+        req_url = "https://www.alphavantage.co/query"
+
+        params = {
+            "apikey" : apikey,
+            "from_currency" : from_currency,
+            "to_currency" : to_currency,
+            "function" : function
+        }
+
+
+        res = requests.get(req_url, params=params)
+        res_json = res.json()['Realtime Currency Exchange Rate']
+
+        return self.makeResultJson(RES_SUCCESS, res_json)
+
+    #https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=BA&apikey=ZSFBXRCOCCY81AN5
+
+    def getRecommendKeyword(self, keyword : str):
+
+        apikey = "ZSFBXRCOCCY81AN5"
+        req_url = "https://www.alphavantage.co/query"
+
+        params = {
+            "apikey" : apikey,
+            "keywords" : keyword,
+            "function" : "SYMBOL_SEARCH"
+        }
+
+        res = requests.get(req_url, params=params)
+        res_json = res.json()['bestMatches']
 
         return self.makeResultJson(RES_SUCCESS, res_json)
