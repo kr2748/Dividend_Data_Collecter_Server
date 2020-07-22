@@ -59,7 +59,7 @@ FAIL
 ***
 
 ### 종가 이력 가져오기
-Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?ticker=ko&start_year=1980&end_year=2020
+Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?symbol=ko
 
 ```
 GET /rest/getClosePriceHistory
@@ -68,9 +68,7 @@ GET /rest/getClosePriceHistory
 - request 
 ```
 {
-  "ticker" : "ko",
-  "start_year" : "1980",
-  "end_year" : "2020",
+  "symbol" : "ko"
 }
 ```
 
@@ -79,12 +77,35 @@ GET /rest/getClosePriceHistory
 SUCCESS
 {
   "data": {
-    "999216000000": 24.3349990845, 
-    "999561600000": 24.75, 
-    "999648000000": 25.2250003815, 
-    "999734400000": 24.7549991608, 
-    "999820800000": 24.8649997711
-  }, 
+    "Meta Data": {
+      "1. Information": "Daily Time Series with Splits and Dividend Events", 
+      "2. Symbol": "KO", 
+      "3. Last Refreshed": "2020-07-22", 
+      "4. Output Size": "Full size", 
+      "5. Time Zone": "US/Eastern"
+    }, 
+    "Time Series (Daily)": {
+      "1999-11-01": {
+        "1. open": "58.2500", 
+        "2. high": "59.3800", 
+        "3. low": "57.8800", 
+        "4. close": "59.0000", 
+        "5. adjusted close": "16.9269", 
+        "6. volume": "4212600", 
+        "7. dividend amount": "0.0000", 
+        "8. split coefficient": "1.0000"
+      }, 
+      "1999-11-02": {
+        "1. open": "58.6300", 
+        "2. high": "58.9400", 
+        "3. low": "57.3100", 
+        "4. close": "57.7500", 
+        "5. adjusted close": "16.5683", 
+        "6. volume": "3226800", 
+        "7. dividend amount": "0.0000", 
+        "8. split coefficient": "1.0000"
+      }, 
+  },
   "description": "\uc131\uacf5", 
   "resultCode": 200
 }
