@@ -412,7 +412,7 @@ SUCCESS
 ***
 
 ### 원달러 환율가져오기 
-Test URL : http://15.164.248.209:20000/rest/getKRWExchangeRate?from_year=2000
+Test URL : http://15.164.248.209:20000/rest/getKRWExchangeRate
 
 ```
 GET /rest/getKRWExchangeRate
@@ -420,9 +420,7 @@ GET /rest/getKRWExchangeRate
 
 - request 
 ```
-{
-  "from_year" : 2000
-}
+
 ```
 
 - response 
@@ -430,10 +428,15 @@ GET /rest/getKRWExchangeRate
 SUCCESS
 {
   "data": {
-    "1000080000000": 1285.0, 
-    "1000166400000": 1291.0, 
-    "1000252800000": 1284.8, 
-    "1000339200000": 1290.25, 
+    "1. From_Currency Code": "USD", 
+    "2. From_Currency Name": "United States Dollar", 
+    "3. To_Currency Code": "KRW", 
+    "4. To_Currency Name": "South Korean Won", 
+    "5. Exchange Rate": "1196.90000000", 
+    "6. Last Refreshed": "2020-07-22 22:05:50", 
+    "7. Time Zone": "UTC", 
+    "8. Bid Price": "1196.90000000", 
+    "9. Ask Price": "1197.90000000"
   }, 
   "description": "\uc131\uacf5", 
   "resultCode": 200
