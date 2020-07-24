@@ -15,7 +15,9 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - Adj. Amount : 주식분할 조정 배당금. 주식분할까지 반영된 정확한 배당금을 말함. 최근에 주식분할이 없었다면 배당금(Amount)과 주식분할 조정 배당금(Adj. Amount)은 동일함
 - Pay Date : 배당금 지급일
 - Call Date : 매입권리 발생 기준일
-- Record Date : 주주명부 확정일
+- Record Date : 주주명부 확정일  
+  
+출처 : https://m.blog.naver.com/PostView.nhn?blogId=danny121227&logNo=221718369992&categoryNo=68&proxyReferer=https:%2F%2Fwww.google.com%2F
 
 ### TODO 리스트
 - [ ] 재무정보 : 현재 크롤링 하도록 되어있음. 재무정보 API 찾아내기
