@@ -93,6 +93,16 @@ class RestController(Resource):
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
+        # 기업 요약 정보
+        elif service_name == "getCompanySummaryInfo":
+
+            symbol = request.args.get('symbol')
+            if symbol != None:
+                return self.getCompanySummaryInfo(symbol)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+
     # 결과 json을 생성해주는 함수
     def makeResultJson(self, res_code : int, data : dict = dict()) -> dict:
 
@@ -291,5 +301,19 @@ class RestController(Resource):
 
         res = requests.get(req_url, params=params)
         res_json = res.json()['bestMatches']
+
+        return self.makeResultJson(RES_SUCCESS, res_json)
+
+    def getCompanySummaryInfo(self, symbol : str):
+        apikey = "ZSFBXRCOCCY81AN5"
+        req_url = "https://www.alphavantage.co/query"
+        params = {
+            "apikey" : apikey,
+            "symbol" : symbol,
+            "function" : "OVERVIEW"
+        }
+
+        res = requests.get(req_url, params=params)
+        res_json = res.json()
 
         return self.makeResultJson(RES_SUCCESS, res_json)
