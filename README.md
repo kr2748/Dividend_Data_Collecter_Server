@@ -20,13 +20,13 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 출처 : https://m.blog.naver.com/PostView.nhn?blogId=danny121227&logNo=221718369992&categoryNo=68&proxyReferer=https:%2F%2Fwww.google.com%2F
 
 ### TODO 리스트
-- [ ] 재무정보 : 현재 크롤링 하도록 되어있음. 재무정보 API 찾아내기
+- [x] 재무정보 : 현재 크롤링 하도록 되어있음. 재무정보 API 찾아내기 
 - [ ] 뉴스 : 현재 크롤링 하도록 되어있음. API 찾아내기
 - [ ] 배당 이력 : pandas_datareader 라이브러리 사용중인데, 내부적으로 크롤링을 하고 있어서 느림. API를 찾아내기.
 - [x] 그래프 라이브러리 적용 : https://github.com/PhilJay/MPAndroidChart
-- [ ] https://documentation.tradier.com/brokerage-api/markets/fundamentals/get-dividends API 사용해보기  
+- [x] https://documentation.tradier.com/brokerage-api/markets/fundamentals/get-dividends API 사용해보기 => 돈 내야 사용가능. 
 - [ ] 논 블러킹으로 크롤링 서버 세팅
-- [ ] 배당정보 API 드디어 찾았다.. https://iexcloud.io/docs/api/#dividends
+- [x] 배당정보 API 드디어 찾았다.. https://iexcloud.io/docs/api/#dividends => 이력나오는 API는 돈내야되고, 요약정보는 티커 변경해도 고정된값 나옴. 엉터리.
 
 ### API리스트 
 - [x] 배당 이력 가져오기
