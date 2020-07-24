@@ -5,6 +5,18 @@
 
 http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko
 
+### 용어 정리 
+- Ex-Dividend Date : 배당락일
+- Preferred Stock : 우선주
+- Current Yield : 현재 배당률
+- Declare Date : 배당 발표일(이사회에서 배당금을 지급하기로 결정한 날)
+- Payout Ratio : 배당성향
+- 5 Year Growth Rate : 최근 5년 연평균 배당금 인상률
+- Adj. Amount : 주식분할 조정 배당금. 주식분할까지 반영된 정확한 배당금을 말함. 최근에 주식분할이 없었다면 배당금(Amount)과 주식분할 조정 배당금(Adj. Amount)은 동일함
+- Pay Date : 배당금 지급일
+- Call Date : 매입권리 발생 기준일
+- Record Date : 주주명부 확정일
+
 ### TODO 리스트
 - [ ] 재무정보 : 현재 크롤링 하도록 되어있음. 재무정보 API 찾아내기
 - [ ] 뉴스 : 현재 크롤링 하도록 되어있음. API 찾아내기
