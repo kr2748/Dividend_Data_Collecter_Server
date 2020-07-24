@@ -38,6 +38,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 배당귀족 리스트
 - [x] 원달러 환율
 - [x] 검색 키워드 자동완성
+- [x] 기업 요약 정보
 
 ***
 
