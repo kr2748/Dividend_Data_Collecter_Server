@@ -162,93 +162,90 @@ SUCCESS
 {
     "result_code": "200",
     "description": "success",
-    "data": {
-        "news1": {
-            "news_url": "https://www.youtube.com/watch?v=achKqtU2FYU",
-            "image_url": "https://cdn.snapi.dev/images/v1/r/4/technician-has-one-name-you-should-buy-and-one-you-should-sell-into-earnings.jpg",
-            "title": "Technician has one name you should buy and one you should sell into earnings",
-            "text": "Cornerstone Macro's Carter Worth has earnings winners and losers.",
-            "source_name": "CNBC Television",
-            "date": "Mon, 20 Jul 2020 18:14:45 -0400",
-            "topics": [
-                "tanalysis"
-            ],
-            "sentiment": "Neutral",
-            "type": "Video",
-            "tickers": [
-                "KO",
-                "SHW"
-            ],
-            "title_ko": "\uae30\uc220\uc790\ub294 \ud558\ub098\uc758 \uc774\ub984\uc744 \uc0ac\uc57c\ud558\uace0 \ub2e4\ub978 \ud558\ub098\ub294 \uc218\uc785\uc73c\ub85c \ud314\uc544\uc57c\ud569\ub2c8\ub2e4"
-        },
-        "news2": {
-            "news_url": "https://www.fool.com/investing/2020/07/20/dow-jones-lags-as-microsoft-stock-surges-coca-cola.aspx",
-            "image_url": "https://cdn.snapi.dev/images/v1/z/4/urlhttps3a2f2fgfoolcdncom2feditorial2fimages2f5292312fgettyimages-1153657433jpgw700opresize.jpg",
-            "title": "Dow Jones Lags as Microsoft Stock Surges, Coca-Cola Stock Sinks Ahead of Earnings",
-            "text": "Analysts expect solid results from Microsoft and awful results from Coca-Cola.",
-            "source_name": "The Motley Fool",
-            "date": "Mon, 20 Jul 2020 15:06:00 -0400",
-            "topics": [],
-            "sentiment": "Neutral",
-            "type": "Article",
-            "tickers": [
-                "KO",
-                "MSFT"
-            ],
-            "title_ko": "\ub2e4\uc6b0 \uc874\uc2a4, \ub9c8\uc774\ud06c\ub85c \uc18c\ud504\ud2b8 \uc99d\uad8c \uae09\ub4f1\uc73c\ub85c \ucf54\uce74\ucf5c\ub77c \uc99d\uad8c \uc2f1\ud06c\uac00 \uc55e\uc11c\uace0\uc788\ub2e4"
-        },
-        "news3": {
-            "news_url": "https://www.forbes.com/sites/adamsarhan/2020/07/20/earnings-preview-what-to-expect-from-coke-on-tuesday/",
-            "image_url": "https://cdn.snapi.dev/images/v1/8/f/earnings-preview-what-to-expect-from-coke-on-tuesday.jpg",
-            "title": "Earnings Preview: What To Expect From Coke On Tuesday",
-            "text": "Coke is expected to report $0.40/share on $8.69 billion in revenue. Meanwhile, the so-called Whisper number is $0.44.",
+    "data": [
+        {
+            "news_url": "https://www.forbes.com/sites/greatspeculations/2020/07/24/can-coca-colas-stock-rise-any-further/",
+            "image_url": "https://cdn.snapi.dev/images/v1/y/t/can-coca-colas-stock-rise-any-further.jpg",
+            "title": "Can Coca-Cola\u2019s Stock Rise Any Further?",
+            "text": "Despite almost a 30% rise since the March 23 lows of this year, at the current price of around $48 per share, we believe Coca-Cola stock has some upside left. KO stock has increased from $37 to $48 off the recent bottom, less than the S&P which increased by 46% from its recent bottom.",
             "source_name": "Forbes",
-            "date": "Mon, 20 Jul 2020 13:38:22 -0400",
-            "topics": [
-                "earnings"
-            ],
+            "date": "Fri, 24 Jul 2020 08:30:00 -0400",
+            "topics": [],
             "sentiment": "Positive",
             "type": "Article",
             "tickers": [
                 "KO"
             ],
-            "title_ko": "\uc2e4\uc801 \ubbf8\ub9ac\ubcf4\uae30 : \ud654\uc694\uc77c \ucf5c\ub77c\uc5d0\uc11c \uc608\uc0c1\ub418\ub294 \uc0ac\ud56d"
+            "title_ko": "\ucf54\uce74\ucf5c\ub77c\uc758 \uc8fc\uac00\uac00 \ub354 \uc0c1\uc2b9 \ud560 \uc218 \uc788\ub294\uac00?"
         },
-        "news4": {
-            "news_url": "https://www.businesswire.com/news/home/20200720005144/en/Bradley-Gayton-Elected-Senior-Vice-President-General/",
-            "image_url": "https://cdn.snapi.dev/images/v1/w/2/press17.jpg",
-            "title": "Bradley Gayton Elected Senior Vice President and General Counsel of The Coca-Cola Company",
-            "text": "ATLANTA--(BUSINESS WIRE)--The Coca-Cola Company today announced that Bradley Gayton has been elected senior vice president and general counsel. He will join the company Sept.",
-            "source_name": "Business Wire",
-            "date": "Mon, 20 Jul 2020 09:00:00 -0400",
+        {
+            "news_url": "https://seekingalpha.com/article/4360370-coca-cola-femsa-s-b-de-c-v-kof-ceo-john-santa-maria-on-q2-2020-results-earnings-call",
+            "image_url": "https://cdn.snapi.dev/images/v1/5/l/transcript50.jpg",
+            "title": "Coca-Cola FEMSA, S.A.B. de C.V. (KOF) CEO John Santa Maria on Q2 2020 Results - Earnings Call Transcript",
+            "text": "Coca-Cola FEMSA, S.A.B. de C.V. (KOF) CEO John Santa Maria on Q2 2020 Results - Earnings Call Transcript",
+            "source_name": "Seeking Alpha",
+            "date": "Thu, 23 Jul 2020 16:16:08 -0400",
             "topics": [
-                "PressRelease"
+                "CallScript"
             ],
             "sentiment": "Neutral",
             "type": "Article",
             "tickers": [
                 "KO"
             ],
-            "title_ko": "\ube0c\ub798\ub4e4\ub9ac \uac8c\uc774 \ud134, \ucf54\uce74\ucf5c\ub77c \ud68c\uc0ac\uc758 \uc218\uc11d \ubd80\uc0ac\uc7a5 \uacb8 \ubc95\ub960 \uace0\ubb38 \uc120\uc784"
+            "title_ko": "\ucf54\uce74\ucf5c\ub77c FEMSA, S.A.B. \ub4dc C.V. (KOF) 2020 \ub144 2 \ubd84\uae30 \uacb0\uacfc\uc5d0 \ub300\ud55c CEO John Santa Maria-\uc2e4\uc801 \ubcf4\uace0\uc11c"
         },
-        "news5": {
-            "news_url": "https://www.fool.com/investing/2020/07/19/3-things-to-watch-in-the-stock-market-this-week.aspx",
-            "image_url": "https://cdn.snapi.dev/images/v1/5/p/etf39-5.jpg",
-            "title": "3 Things to Watch in the Stock Market This Week",
-            "text": "Tesla is one of several high-profile stocks set to announce earnings results over the next few trading days.",
+        {
+            "news_url": "https://www.fool.com/investing/2020/07/23/coca-cola-explains-why-a-full-recovery-could-take.aspx",
+            "image_url": "https://cdn.snapi.dev/images/v1/h/m/coke-340446-1280.jpg",
+            "title": "Coca-Cola Explains Why a Full Recovery Could Take Years",
+            "text": "Consumers aren't moving around like they used to, according to details from Coke's second-quarter earnings report.",
             "source_name": "The Motley Fool",
-            "date": "Sun, 19 Jul 2020 08:05:00 -0400",
+            "date": "Thu, 23 Jul 2020 15:34:33 -0400",
+            "topics": [],
+            "sentiment": "Negative",
+            "type": "Article",
+            "tickers": [
+                "KO"
+            ],
+            "title_ko": "\ucf54\uce74\ucf5c\ub77c\ub294 \uc804\uccb4 \ubcf5\uad6c\uc5d0 \uba87 \ub144\uc774 \uac78\ub9ac\ub294 \uc774\uc720\ub97c \uc124\uba85\ud569\ub2c8\ub2e4"
+        },
+        {
+            "news_url": "https://seekingalpha.com/article/4360165-retirement-strategy-blue-skies-for-dividend-growth-investors-storms-ahead-for-savers?utm_source=feed_articles_dividends_dividend_strategy&utm_medium=referral",
+            "image_url": "https://cdn.snapi.dev/images/v1/l/d/103334235-gettyimages-498338509.jpg",
+            "title": "Retirement Strategy: Blue Skies For Dividend Growth Investors, More Storms Ahead For Savers",
+            "text": "The Federal Reserve has given another clear signal that there is less risk for investors, especially in long term.",
+            "source_name": "Seeking Alpha",
+            "date": "Thu, 23 Jul 2020 09:00:00 -0400",
+            "topics": [
+                "dividend"
+            ],
+            "sentiment": "Positive",
+            "type": "Article",
+            "tickers": [
+                "JNJ",
+                "KO",
+                "MO",
+                "O"
+            ],
+            "title_ko": "\ud1f4\uc9c1 \uc804\ub7b5 : \ubc30\ub2f9 \uc131\uc7a5 \ud22c\uc790\uc790\ub97c\uc704\ud55c \ud478\ub978 \ud558\ub298, \ubcf4\ud638\uc790\ub97c\uc704\ud55c \ub354 \ub9ce\uc740 \ud3ed\ud48d"
+        },
+        {
+            "news_url": "https://www.zacks.com/stock/news/1012407/will-cokes-plan-to-cut-its-zombie-brands-boost-revenues",
+            "image_url": "https://cdn.snapi.dev/images/v1/r/r/coca-cola-462776-1280.jpg",
+            "title": "Will Coke's Plan to Cut Its Zombie Brands Boost Revenues?",
+            "text": "Coca-Cola is massively streamlining its businesses in a bid to push for a more efficient business plan. Let's see how feasible it could be.",
+            "source_name": "Zacks Investment Research",
+            "date": "Thu, 23 Jul 2020 08:17:00 -0400",
             "topics": [],
             "sentiment": "Neutral",
             "type": "Article",
             "tickers": [
-                "IRBT",
-                "KO",
-                "TSLA"
+                "KO"
             ],
-            "title_ko": "\uc774\ubc88 \uc8fc \uc8fc\uc2dd \uc2dc\uc7a5\uc5d0\uc11c \ubcfc 3 \uac00\uc9c0"
+            "title_ko": "\ucf54\uce74\uc778\uc758 \uc880\ube44 \ube0c\ub79c\ub4dc \uc778\ud558 \uacc4\ud68d\uc774 \uc218\uc775\uc744 \uc99d\ub300\uc2dc\ud0ac \uac83\uc778\uac00?"
         }
-    }
+    ]
 }
 
 FAIL 
