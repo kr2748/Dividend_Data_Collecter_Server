@@ -1942,3 +1942,97 @@ FAIL
 }
 
 ```
+
+
+### 기업 요약 정보
+Test URL : http://15.164.248.209:20000/rest/getCompanySummaryInfo?symbol=KO
+
+```
+GET /rest/getCompanySummaryInfo
+```
+
+- request 
+```
+{
+  "symbol" : "KO"
+}
+```
+
+- response 
+```
+SUCCESS
+
+{
+  "data": {
+    "200DayMovingAverage": "49.464", 
+    "50DayMovingAverage": "46.1911", 
+    "52WeekHigh": "60.13", 
+    "52WeekLow": "36.27", 
+    "Address": "One Coca-Cola Plaza, Atlanta, GA, United States, 30301", 
+    "AnalystTargetPrice": "53.45", 
+    "AssetType": "Common Stock", 
+    "Beta": "0.544", 
+    "BookValue": "4.071", 
+    "Country": "USA", 
+    "Currency": "USD", 
+    "Description": "The Coca-Cola Company, a beverage company, manufactures, markets, and sells various nonalcoholic beverages worldwide. The company provides sparkling soft drinks; water, enhanced water, and sports drinks; juice, dairy, and plantbased beverages; tea and coffee; and energy drinks. It also offers beverage concentrates and syrups, as well as fountain syrups to fountain retailers, such as restaurants and convenience stores. The company sells its products under the Coca-Cola, Diet Coke/Coca-Cola Light, Coca-Cola Zero Sugar, Fanta, Fresca, Schweppes, Sprite, Thums Up, Aquarius, Ciel, Dasani, glacau smartwater, glacau vitaminwater, Ice Dew, I LOHAS, Powerade, Topo Chico, AdeS, Del Valle, fairlife, innocent, Minute Maid, Minute Maid Pulpy, Simply, ZICO, Ayataka, Costa, dogadan, FUZE TEA, Georgia, Gold Peak, HONEST TEA, and Kochakaden brands. It operates through a network of company-owned or controlled bottling and distribution operators, as well as through independent bottling partners, distributors, wholesalers, and retailers. The company was founded in 1886 and is headquartered in Atlanta, Georgia.", 
+    "DilutedEPSTTM": "2.12", 
+    "DividendDate": "2020-10-01", 
+    "DividendPerShare": "1.64", 
+    "DividendYield": "0.034", 
+    "EBITDA": "11226999808", 
+    "EPS": "2.12", 
+    "EVToEBITDA": "18.2904", 
+    "EVToRevenue": "7.0133", 
+    "ExDividendDate": "2020-09-14", 
+    "Exchange": "NYSE", 
+    "FiscalYearEnd": "December", 
+    "ForwardAnnualDividendRate": "1.64", 
+    "ForwardAnnualDividendYield": "0.034", 
+    "ForwardPE": "25.5102", 
+    "FullTimeEmployees": "86200", 
+    "GrossProfitTTM": "22647000000", 
+    "Industry": "BeveragesNon-Alcoholic", 
+    "LastSplitDate": "2012-08-13", 
+    "LastSplitFactor": "2:1", 
+    "LatestQuarter": "2020-03-31", 
+    "MarketCapitalization": "209230872576", 
+    "Name": "The Coca-Cola Company", 
+    "OperatingMarginTTM": "0.2831", 
+    "PEGRatio": "4.2422", 
+    "PERatio": "22.8679", 
+    "PayoutRatio": "0.7642", 
+    "PercentInsiders": "0.696", 
+    "PercentInstitutions": "69.997", 
+    "PriceToBookRatio": "11.9093", 
+    "PriceToSalesRatioTTM": "6.1041", 
+    "ProfitMargin": "0.2677", 
+    "QuarterlyEarningsGrowthYOY": "-0.328", 
+    "QuarterlyRevenueGrowthYOY": "-0.285", 
+    "ReturnOnAssetsTTM": "0.0658", 
+    "ReturnOnEquityTTM": "0.4664", 
+    "RevenuePerShareTTM": "8.007", 
+    "RevenueTTM": "34325999616", 
+    "Sector": "Consumer Defensive", 
+    "SharesFloat": "4261370150", 
+    "SharesOutstanding": "4295439872", 
+    "SharesShort": "24221422", 
+    "SharesShortPriorMonth": "26507099", 
+    "ShortPercentFloat": "0.0057", 
+    "ShortPercentOutstanding": "0.01", 
+    "ShortRatio": "1.33", 
+    "Symbol": "KO", 
+    "TrailingPE": "22.8679"
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
