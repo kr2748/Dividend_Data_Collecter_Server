@@ -174,46 +174,19 @@ class RestController(Resource):
     # 재무정보 구하는 함수
     def getFinanceInfo(self, ticker : str):
 
-        ua = UserAgent()
-        headers = {'User-Agent' : ua.random} #변경하고 싶은 user-agent 값
+        apikey = "ZSFBXRCOCCY81AN5"
+        req_url = "https://www.alphavantage.co/query"
 
+        params = {
+            "apikey" : apikey,
+            "symbol" : ticker,
+            "function" : "BALANCE_SHEET"
+        }
 
-        target_site_url = "https://finviz.com/quote.ashx?t={}".format(ticker)
-        res = requests.get(target_site_url, headers=headers)
+        res = requests.get(req_url, params=params)
+        res_json = res.json()
 
-        dom = BeautifulSoup(res.content,'html.parser')
-
-        #없는 티커 입력시 예외처리
-        if(len(dom.select('.snapshot-td2')) < 10):
-            return {"result_code":"100","reason":"Invalid Ticker"}
-
-        #각종 지표 크롤링
-        PER = dom.select('.snapshot-td2')[1].text
-        EPS_ttm = dom.select('.snapshot-td2')[2].text
-        PBR = dom.select('.snapshot-td2')[25].text
-        ROE = dom.select('.snapshot-td2')[33].text
-        ROA = dom.select('.snapshot-td2')[27].text
-        PCR = dom.select('.snapshot-td2')[31].text
-        BETA = dom.select('.snapshot-td2')[41].text
-        Employees = dom.select('.snapshot-td2')[48].text
-
-        #뉴스 가져오기
-        recent_news_title = dom.select("#news-table")[0].select("tr")[0].text
-        recent_news_link = dom.select("#news-table")[0].select("tr")[0].select('a')[0].attrs['href']
-
-        result_data = dict()
-        result_data["PER"] = PER
-        result_data["EPS(ttm)"] = EPS_ttm
-        result_data["PBR"] = PBR
-        result_data["ROE"] = ROE
-        result_data["ROA"] = ROA
-        result_data["PCR"] = PCR
-        result_data["BETA"] = BETA
-        result_data["Employees"] = Employees
-        result_data["RecentNewsTitle"] = recent_news_title
-        result_data["RecentNewsLink"] = recent_news_link
-
-        return self.makeResultJson(RES_SUCCESS, result_data)
+        return self.makeResultJson(RES_SUCCESS, res_json)
 
     # 배당킹 티커 리스트 구하기
     def getDividendKingTickerList(self) -> list:
