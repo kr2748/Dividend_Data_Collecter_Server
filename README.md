@@ -25,6 +25,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [ ] 배당 이력 : pandas_datareader 라이브러리 사용중인데, 내부적으로 크롤링을 하고 있어서 느림. API를 찾아내기.
 - [ ] 그래프 라이브러리 적용 : https://github.com/PhilJay/MPAndroidChart
 - [ ] https://documentation.tradier.com/brokerage-api/markets/fundamentals/get-dividends API 사용해보기  
+- [ ] 논 블러킹으로 크롤링 서버 세팅
 
 ### API리스트 
 - [x] 배당 이력 가져오기
