@@ -2748,3 +2748,13 @@ params : ImmutableMultiDict([('ticker', 'KO'), ('start_year', '1980'), ('end_yea
  * Debugger is active!
  * Debugger PIN: 120-729-785
 118.36.139.123 - - [24/Jul/2020 14:13:18] "[37mGET /rest/getFinanceInfo?ticker=ko HTTP/1.1[0m" 200 -
+ * Detected change in '/home/joorini/Projects/CrawlingSvr/Controllers/RestController.py', reloading
+[RestController]get request received! service_name : getFinanceInfo
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-729-785
+ * Detected change in '/home/joorini/Projects/CrawlingSvr/Controllers/RestController.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-729-785
+118.36.139.123 - - [24/Jul/2020 14:16:19] "[37mGET /rest/getNewsByTicker?ticker=ko HTTP/1.1[0m" 200 -

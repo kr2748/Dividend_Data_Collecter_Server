@@ -164,10 +164,13 @@ class RestController(Resource):
 
         data = dict()
 
-        for idx, content in enumerate(news):
-            data["news{}".format(idx+1)] = content
+        content_list = []
 
-        result_dict["data"] = data
+        for idx, content in enumerate(news):
+            content_list.append(content)
+            #data["news{}".format(idx+1)] = content
+
+        result_dict["data"] = content_list
 
         return result_dict
 
