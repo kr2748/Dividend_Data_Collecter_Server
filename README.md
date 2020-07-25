@@ -22,7 +22,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 ### TODO 리스트
 - [x] 재무정보 : 현재 크롤링 하도록 되어있음. 재무정보 API 찾아내기 => <del>무료 계정은 쿼리 수 제한있음</del>
 - [ ] 뉴스 : 현재 크롤링 하도록 되어있음. API 찾아내기
-- [ ] 배당 이력 : pandas_datareader 라이브러리 사용중인데, 내부적으로 크롤링을 하고 있어서 느림. API를 찾아내기.
+- [ ] 배당 이력 : pandas_datareader 라이브러리 사용중인데, 내부적으로 크롤링을 하고 있어서 느림. API를 찾아내기. => 내부 DB 사용할 예정
 - [x] 그래프 라이브러리 적용 : https://github.com/PhilJay/MPAndroidChart
 - [x] https://documentation.tradier.com/brokerage-api/markets/fundamentals/get-dividends API 사용해보기 => <del>돈 내야 사용가능. </del>
 - [ ] 논 블러킹으로 크롤링 서버 세팅
@@ -32,13 +32,14 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 배당 이력 가져오기
 - [x] 종가이력 구하기
 - [x] 뉴스 구하기
-- [ ] 이번주에 배당락 혹은 배당 주는 주식 구하기
+- [x] 이번주에 배당락 혹은 배당 주는 주식 구하기
 - [x] 재무정보 구하기
 - [x] 배당킹 리스트
 - [x] 배당귀족 리스트
 - [x] 원달러 환율
 - [x] 검색 키워드 자동완성
 - [x] 기업 요약 정보
+- [x] 이번달에 배당락 혹은 배당 주는 주식 구하기
 
 ***
 
