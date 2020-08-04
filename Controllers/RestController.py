@@ -9,11 +9,23 @@ import pandas_datareader as pdr
 import json
 from bs4 import BeautifulSoup
 import FinanceDataReader as fdr
+from selenium import webdriver
+import calendar
+from datetime import datetime
+import pymysql
 
+
+#hii
 #Response 임시 코드
 RES_FAIL = 100 #실패
 RES_FAIL_PARAM_ERR = 101 #필수 파라미터 에러
 RES_SUCCESS = 200 #성공
+
+# DB
+HOST = "0.0.0.0"
+USERNAME = "root"
+PASSWORD = "app"
+DB_NAME = "finance_db"
 
 
 class RestController(Resource):
@@ -73,11 +85,11 @@ class RestController(Resource):
 
         #배당킹 구하기
         elif service_name == "getDividendKingTickerList":
-            return self.getDividendKingTickerList()
+            return self.getDividendKingListFromDB()
 
         #배당 귀족 구하기
         elif service_name == "getDividendAristocratsList":
-            return self.getDividendAristocratsList()
+            return self.getDividendAristocratListFromDB()
 
         # 원달러 환율
         elif service_name == "getKRWExchangeRate":
@@ -101,6 +113,9 @@ class RestController(Resource):
                 return self.getCompanySummaryInfo(symbol)
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+        elif service_name == "getThisMonthDividendStock":
+            return self.getThisMonthDividendStock()
 
 
     # 결과 json을 생성해주는 함수
@@ -301,6 +316,7 @@ class RestController(Resource):
 
         res = requests.get(req_url, params=params)
         res_json = res.json()['bestMatches']
+        #HIsssssssss
 
         return self.makeResultJson(RES_SUCCESS, res_json)
 
@@ -317,3 +333,165 @@ class RestController(Resource):
         res_json = res.json()
 
         return self.makeResultJson(RES_SUCCESS, res_json)
+
+
+    def getThisMonthDividendStock(self):
+        chrome_driver_path = os.getcwd() + "/bin/chromedriver"
+        dividend_calaner_url = "https://kr.investing.com/dividends-calendar/"
+
+
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+        options.add_argument('window-size=1920x1080')
+        options.add_argument("disable-gpu")
+
+        # UserAgent값을 바꿔줍시다!
+        options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
+
+
+        print("driver path : {}".format(chrome_driver_path))
+
+        # 웹 드라이버 인스턴스를 얻는다.
+        driver = webdriver.Chrome(chrome_driver_path, options=options)
+
+        print("00000000")
+
+
+        driver.implicitly_wait(3)
+
+        # 배당 캘린더 url에 접근한다.
+        driver.get(dividend_calaner_url)
+
+        # 달력 버튼을 누르고,
+        this_week_btn = driver.find_element_by_id("datePickerToggleBtn")
+        this_week_btn.click()
+
+        today = datetime.today()
+
+        #시작 날짜 적고... (이달 첫날을 적는다.)
+        start_date_edit_text = driver.find_element_by_id("startDate")
+        start_date_edit_text.clear()
+        start_date_edit_text.send_keys('{}/{}/01'.format(today.year,today.month))
+
+        #끝 날짜 적고.. (이달 말일을 적는다..)
+        end_date_edit_text = driver.find_element_by_id("endDate")
+        end_date_edit_text.clear()
+        end_date_edit_text.send_keys('{}/{}/{}'.format(today.year,today.month,calendar.monthrange(today.year,today.month)[1]))
+
+        print("1111111111")
+
+        #신청합니다 버튼 누른다.
+        apply_btn = driver.find_element_by_id("applyBtn")
+        apply_btn.click()
+
+        for idx in range(5):
+
+            #로딩해야되니까 3초정도 기다린다.
+            #driver.implicitly_wait(5)
+
+            #그리고 창을 맨 아래로 내린다.
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight-200);")
+
+        #로딩이 다 되면 데이터들을 긁어온다.
+
+
+        time.sleep(3)
+
+
+        print("2222222222")
+
+
+        dom = BeautifulSoup(driver.page_source, 'html.parser')
+
+        #뭔 이상한 팝업이 뜨는데 포커스 없어져서, 이놈 제거
+        driver.execute_script("document.getElementsByClassName('generalOverlay')[0].style.display = 'none';")
+        dividends_table = dom.select('#dividendsCalendarData')
+        items = dividends_table[0].select('tr')
+
+        result_stocks_list = []
+
+        for idx, item in enumerate(items):
+
+            if item.find_all("td", {"class": "flag"}):
+                #print(item.findAll("td")[0])
+
+                item_data = item.findAll("td")
+                ticker = item_data[1].text.split("(")[1].split(")")[0] #티커
+                dividend_date = item_data[2].text #배당락일
+                allocation = item_data[3].text  #배당액
+                dividend_payment_date = item_data[5].text #배당지급일
+                dividend_payment_rate = item_data[6].text
+
+                single_item_dict = dict()
+                single_item_dict["ticker"] = ticker
+                single_item_dict["dividend_date"] = dividend_date
+                single_item_dict["allocation"] = allocation
+                single_item_dict["dividend_payment_date"] = dividend_payment_date
+                single_item_dict["dividend_payment_rate"] = dividend_payment_rate
+
+                print(single_item_dict)
+
+                result_stocks_list.append(single_item_dict)
+
+        return self.makeResultJson(RES_SUCCESS, result_stocks_list)
+
+    # 월별 배당정보 DB에서 가져오는 함수
+    def getMontlyDividendsInfoFromDB(self, from_year : int, from_month : int, to_year : int, to_month : int):
+
+        conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
+        cursor = conn.cursor()
+
+        result_dict = []
+
+        sql = "SELECT * FROM `finance_info` WHERE `dividends_date` BETWEEN '{}-{}-01' AND '{}-{}-31' LIMIT 0,1000;\
+        ".format(from_year, from_month, to_year, to_month)
+
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        for row_data in result:
+            print(row_data)
+            #print(row_data[0])
+
+        conn.close()
+
+    # 배당킹 리스트 가져오는 함수
+    def getDividendKingListFromDB(self):
+
+        conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
+        cursor = conn.cursor()
+
+        result_dict = []
+
+        sql = "SELECT * FROM `finance_info` WHERE `hot_dividends` = '1' LIMIT 0,1000;"
+        print(sql)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        for row_data in result:
+            #print(row_data)
+            result_dict.append(row_data[0])
+            #print(row_data[0])
+
+        print(result_dict)
+
+        conn.close()
+        return self.makeResultJson(RES_SUCCESS, result_dict)
+
+    # 배당귀족 리스트 가져오는 함수
+    def getDividendAristocratListFromDB(self):
+
+        conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
+        cursor = conn.cursor()
+
+        result_dict = []
+
+        sql = "SELECT * FROM `finance_info` WHERE `hot_dividends` = '2' LIMIT 0,1000;"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        for row_data in result:
+            print(row_data)
+            result_dict.append(row_data[0])
+            #print(row_data[0])
+
+        conn.close()
+
+        return self.makeResultJson(RES_SUCCESS, result_dict)
