@@ -32,6 +32,7 @@ class RestController(Resource):
 
     # Get 요청에 대한 콜백함수
     def get(self, service_name):
+
         print("[RestController]get request received! service_name : {}".format(service_name))
 
         #배당 이력 구하기
@@ -114,8 +115,21 @@ class RestController(Resource):
             else:
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
-        elif service_name == "getThisMonthDividendStock":
-            return self.getThisMonthDividendStock()
+        elif service_name == "getMontlyDividendsData":
+            from_year = request.args.get('from_year')
+            from_month = request.args.get('from_month')
+            to_year = request.args.get('to_year')
+            to_month = request.args.get('to_month')
+
+            if from_year != None and from_month != None and to_year != None and to_month != None:
+                return self.getMontlyDividendsInfoFromDB(from_year, from_month, to_year, to_month)
+            else :
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+            #def getMontlyDividendsInfoFromDB(self, from_year : int, from_month : int, to_year : int, to_month : int):
+
+
+            return self.getMontlyDividendsInfoFromDB()
 
 
     # 결과 json을 생성해주는 함수
@@ -441,7 +455,7 @@ class RestController(Resource):
         conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
         cursor = conn.cursor()
 
-        result_dict = []
+        result_dict = dict()
 
         sql = "SELECT * FROM `finance_info` WHERE `dividends_date` BETWEEN '{}-{}-01' AND '{}-{}-31' LIMIT 0,1000;\
         ".format(from_year, from_month, to_year, to_month)
@@ -449,10 +463,23 @@ class RestController(Resource):
         cursor.execute(sql)
         result = cursor.fetchall()
         for row_data in result:
-            print(row_data)
+
+            #result_dict[row_data[0]] = "1"
+            symbol = str(row_data[0])
+            result_dict[symbol] = {
+                "name" : row_data[1],
+                "dividends" : row_data[2],
+                "dividends_rate" : row_data[3],
+                "dividends_date" : row_data[4],
+                "payment_date" : row_data[5],
+                "hot_dividends" : row_data[6],
+                "type" : row_data[7]
+            }
             #print(row_data[0])
 
         conn.close()
+
+        return self.makeResultJson(RES_SUCCESS, result_dict)
 
     # 배당킹 리스트 가져오는 함수
     def getDividendKingListFromDB(self):
