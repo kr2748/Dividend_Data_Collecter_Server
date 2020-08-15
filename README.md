@@ -40,6 +40,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 검색 키워드 자동완성
 - [x] 기업 요약 정보
 - [x] 이번달에 배당락 혹은 배당 주는 주식 구하기
+- [x] 심볼 리스트로 배당락일, 배당일 정보 가져오는 API 추가 
 
 ***
 
@@ -2135,6 +2136,59 @@ SUCCESS
       "payment_date": "Tue, 22 Sep 2020 00:00:00 GMT", 
       "type": 0
     }, 
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
+
+### 심볼 리스트로 배당일, 배당락일 등 정보 요청
+Test URL : http://15.164.248.209:20000/rest/getMultipleDividendsInfo?symbol_list=ko,aapl
+
+```
+GET /rest/getMultipleDividendsInfo
+```
+
+- request 
+```
+{
+  "symbol_list" : "ko","aapl" //콤마 단위로 구분. 예시 URL 참고
+}
+```
+
+- response 
+```
+SUCCESS
+
+{
+  "data": {
+    "AAPL": {
+      "dividends": 0.77, 
+      "dividends_date": "Thu, 07 Nov 2019 00:00:00 GMT", 
+      "dividends_rate": 1.0, 
+      "hot_dividends": 0, 
+      "name": "\uc560\ud50c", 
+      "payment_date": "Thu, 14 Nov 2019 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "KO": {
+      "dividends": 0.41, 
+      "dividends_date": "Fri, 12 Jun 2020 00:00:00 GMT", 
+      "dividends_rate": 3.53, 
+      "hot_dividends": 1, 
+      "name": "\ucf54\uce74\ucf5c\ub77c", 
+      "payment_date": "Wed, 01 Jul 2020 00:00:00 GMT", 
+      "type": 0
+    }
   }, 
   "description": "\uc131\uacf5", 
   "resultCode": 200
