@@ -131,6 +131,15 @@ class RestController(Resource):
 
             return self.getMontlyDividendsInfoFromDB()
 
+        # ex) http://15.164.248.209:20000/rest/getMultipleDividendsInfo?symbol_list=1,2
+        elif service_name == "getMultipleDividendsInfo":
+            symbol_list = request.args.get('symbol_list').split(',')
+
+            if len(symbol_list) > 0 :
+                return self.getMultipleDividendsInfoFromDB(symbol_list)
+            else :
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
 
     # 결과 json을 생성해주는 함수
     def makeResultJson(self, res_code : int, data : dict = dict()) -> dict:
@@ -145,6 +154,8 @@ class RestController(Resource):
             result_dict["description"] = "필수 파라미터를 확인해주세요"
         elif res_code is RES_SUCCESS :
             result_dict["description"] = "성공"
+
+        print("makeResutJson result_dict : {}".format(result_dict))
 
         return jsonify(result_dict)
 
@@ -522,3 +533,51 @@ class RestController(Resource):
         conn.close()
 
         return self.makeResultJson(RES_SUCCESS, result_dict)
+
+    def getMultipleDividendsInfoFromDB(self, symbol_list : list):
+
+        conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
+        cursor = conn.cursor()
+
+        result_dict = dict()
+
+        sql = self.getQueryStringFromBySymbolList(symbol_list)
+
+        print("sql : {}".format(sql))
+
+        cursor.execute(sql)
+        result = cursor.fetchall()
+
+        for row_data in result:
+            symbol = str(row_data[0])
+            result_dict[symbol] = {
+                "name" : row_data[1],
+                "dividends" : row_data[2],
+                "dividends_rate" : row_data[3],
+                "dividends_date" : row_data[4],
+                "payment_date" : row_data[5],
+                "hot_dividends" : row_data[6],
+                "type" : row_data[7]
+            }
+
+        print("result_dict : {}".format(result_dict))
+
+        conn.close()
+
+        return self.makeResultJson(RES_SUCCESS, result_dict)
+
+
+
+    # list -> query string
+    def getQueryStringFromBySymbolList(self, symbols : list) -> str :
+        base_sql = "SELECT * FROM `finance_info` WHERE "
+        result_sql = ""
+        if(len(symbols) == 1):
+            result_sql = base_sql + "`symbol` = '{}'".format(symbols[0])
+        else:
+            for idx, symbol in enumerate(symbols):
+                if(idx == 0):
+                    result_sql = base_sql + "`symbol` = '{}'".format(symbols[0])
+                else:
+                    result_sql = result_sql + " OR `symbol` = '{}'".format(symbols[idx])
+        return result_sql
