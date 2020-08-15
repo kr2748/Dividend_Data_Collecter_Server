@@ -40,6 +40,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 검색 키워드 자동완성
 - [x] 기업 요약 정보
 - [x] 이번달에 배당락 혹은 배당 주는 주식 구하기
+- [x] 심볼 리스트로 배당락일, 배당일 정보 가져오는 API 추가 
 
 ***
 
@@ -2038,3 +2039,168 @@ FAIL
 }
 
 ```
+
+
+### 기간별 배당정보 요청
+Test URL : http://15.164.248.209:20000/rest/getMontlyDividendsData?from_year=2020&from_month=8&to_year=2020&to_month=8
+
+```
+GET /rest/getMontlyDividendsData
+```
+
+- request 
+```
+{
+  "from_year" : "2020", //시작 연도
+  "from_month" : "8",   //시작 달
+  "to_year" : "2020",   //끝 연도
+  "to_month" : "8"      //끝 달
+}
+```
+
+- response 
+```
+SUCCESS
+
+{
+  "data": {
+    "ACNB": {
+      "dividends": 0.25, 
+      "dividends_date": "Fri, 28 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 4.73, 
+      "hot_dividends": 0, 
+      "name": "ACNB Corp", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "ADX": {
+      "dividends": 0.0525, 
+      "dividends_date": "Mon, 17 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 1.34, 
+      "hot_dividends": 0, 
+      "name": "Adams Diversified Equity Closed", 
+      "payment_date": "Tue, 01 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AEM": {
+      "dividends": 0.2, 
+      "dividends_date": "Fri, 28 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 1.06, 
+      "hot_dividends": 0, 
+      "name": "Agnico-Eagle Mines", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AFAP": {
+      "dividends": 2.0, 
+      "dividends_date": "Mon, 31 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 1.14, 
+      "hot_dividends": 0, 
+      "name": "AFA Protective", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AFGC": {
+      "dividends": 0.320325, 
+      "dividends_date": "Mon, 31 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 4.84, 
+      "hot_dividends": 0, 
+      "name": "American Financial Group", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AGO_pb": {
+      "dividends": 0.4297, 
+      "dividends_date": "Fri, 28 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 6.23, 
+      "hot_dividends": 0, 
+      "name": "Assured Guaranty Muni Hold Pb Pref", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AIC": {
+      "dividends": 0.421875, 
+      "dividends_date": "Fri, 28 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 7.42, 
+      "hot_dividends": 0, 
+      "name": "Arlington Asset Investment Co ELKS", 
+      "payment_date": "Tue, 15 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "AIZ": {
+      "dividends": 0.63, 
+      "dividends_date": "Fri, 28 Aug 2020 00:00:00 GMT", 
+      "dividends_rate": 2.39, 
+      "hot_dividends": 0, 
+      "name": "\uc5b4\uc288\uc5b4\ub7f0\ud2b8", 
+      "payment_date": "Tue, 22 Sep 2020 00:00:00 GMT", 
+      "type": 0
+    }, 
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
+
+### 심볼 리스트로 배당일, 배당락일 등 정보 요청
+Test URL : http://15.164.248.209:20000/rest/getMultipleDividendsInfo?symbol_list=ko,aapl
+
+```
+GET /rest/getMultipleDividendsInfo
+```
+
+- request 
+```
+{
+  "symbol_list" : "ko","aapl" //콤마 단위로 구분. 예시 URL 참고
+}
+```
+
+- response 
+```
+SUCCESS
+
+{
+  "data": {
+    "AAPL": {
+      "dividends": 0.77, 
+      "dividends_date": "Thu, 07 Nov 2019 00:00:00 GMT", 
+      "dividends_rate": 1.0, 
+      "hot_dividends": 0, 
+      "name": "\uc560\ud50c", 
+      "payment_date": "Thu, 14 Nov 2019 00:00:00 GMT", 
+      "type": 0
+    }, 
+    "KO": {
+      "dividends": 0.41, 
+      "dividends_date": "Fri, 12 Jun 2020 00:00:00 GMT", 
+      "dividends_rate": 3.53, 
+      "hot_dividends": 1, 
+      "name": "\ucf54\uce74\ucf5c\ub77c", 
+      "payment_date": "Wed, 01 Jul 2020 00:00:00 GMT", 
+      "type": 0
+    }
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
+
