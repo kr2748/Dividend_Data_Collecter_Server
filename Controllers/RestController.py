@@ -577,7 +577,18 @@ class RestController(Resource):
         else:
             for idx, symbol in enumerate(symbols):
                 if(idx == 0):
-                    result_sql = base_sql + "`symbol` = '{}'".format(symbols[0])
+                    result_sql = base_sql + "(`symbol` = '{}'".format(symbols[0])
                 else:
                     result_sql = result_sql + " OR `symbol` = '{}'".format(symbols[idx])
+
+        result_sql = result_sql + ")"
+
+        # NULL 체크 루틴 추가
+        result_sql = result_sql + "AND `name` IS NOT NULL "
+        result_sql = result_sql + "AND `dividends` IS NOT NULL "
+        result_sql = result_sql + "AND `dividends_rate` IS NOT NULL "
+        result_sql = result_sql + "AND `dividends_date` IS NOT NULL "
+        result_sql = result_sql + "AND `payment_date` IS NOT NULL "
+
+
         return result_sql
