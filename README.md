@@ -41,6 +41,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 - [x] 기업 요약 정보
 - [x] 이번달에 배당락 혹은 배당 주는 주식 구하기
 - [x] 심볼 리스트로 배당락일, 배당일 정보 가져오는 API 추가 
+- [x] 최근 종가 
 
 ***
 
@@ -2202,5 +2203,41 @@ FAIL
 }
 
 ```
+
+### 최근 종가
+Test URL : http://15.164.248.209:20000/rest/getLatestClosePrice?symbol=ko
+
+```
+GET /rest/getLatestClosePrice
+```
+
+- request 
+```
+{
+  "symbol_list" : "ko"
+}
+```
+
+- response 
+```
+SUCCESS
+
+{
+  "data": {
+    "close_price": "47.2800"
+  }, 
+  "description": "\uc131\uacf5", 
+  "resultCode": 200
+}
+
+FAIL 
+{
+  "data":{},  
+  "description":"필수 파라미터를 확인해주세요",  
+  "resultCode":101  
+}
+
+```
+
 
 
