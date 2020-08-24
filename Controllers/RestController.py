@@ -131,6 +131,16 @@ class RestController(Resource):
 
             return self.getMontlyDividendsInfoFromDB()
 
+        #최근 종가
+        #http://15.164.248.209:20000/rest/getLatestClosePrice?symbol=ko
+        elif service_name == "getLatestClosePrice":
+            symbol = request.args.get('symbol')
+            if symbol != None:
+                return self.getLatestClosePrice(symbol)
+            else:
+                return self.makeResultJson(RES_FAIL_PARAM_ERR)
+
+
         # ex) http://15.164.248.209:20000/rest/getMultipleDividendsInfo?symbol_list=1,2
         elif service_name == "getMultipleDividendsInfo":
             symbol_list = request.args.get('symbol_list').split(',')
@@ -180,7 +190,7 @@ class RestController(Resource):
             "apikey" : apikey,
             "symbol" : symbol,
             "function" : "TIME_SERIES_DAILY_ADJUSTED",
-            "outputsize" : "full"
+            "outputsize" : "compact"
         }
 
         res = requests.get(req_url, params=params)
@@ -592,3 +602,23 @@ class RestController(Resource):
 
 
         return result_sql
+
+    def getLatestClosePrice(self, symbol : str):
+
+        apikey = "ZSFBXRCOCCY81AN5"
+        req_url = "https://www.alphavantage.co/query"
+
+        params = {
+            "apikey" : apikey,
+            "symbol" : symbol,
+            "function" : "GLOBAL_QUOTE"
+        }
+
+        res = requests.get(req_url, params=params)
+        res_json = res.json()
+        close_price = res_json['Global Quote']['05. price']
+
+        result_dict = dict()
+        result_dict['close_price'] = close_price
+
+        return self.makeResultJson(RES_SUCCESS, result_dict)
