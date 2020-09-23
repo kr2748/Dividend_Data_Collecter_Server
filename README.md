@@ -3,7 +3,7 @@
 현재 주린이 프로젝트에서 크롤러 서버는 20000번 포트를 사용중입니다.  
 예를 들어, 배당이력을 가져오고자 할때는 아래와 같은 형태로 요청하면 데이터를 전달받을 수 있습니다. 
 
-http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko
+http://20.194.41.177:21000/rest/getDividendHistory?start_year=1980&end_year=2020&ticker=ko
 
 ### 용어 정리 
 - Ex-Dividend Date : 배당락일
@@ -46,7 +46,7 @@ http://15.164.248.209:20000/rest/getDividendHistory?start_year=1980&end_year=202
 ***
 
 ### 배당 이력 가져오기
-Test URL : http://15.164.248.209:20000/rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020
+Test URL : http://20.194.41.177:21000/rest/getDividendHistory?ticker=ko&start_year=1980&end_year=2020
 
 ```
 GET /rest/getDividendHistory
@@ -86,7 +86,7 @@ FAIL
 ***
 
 ### 종가 이력 가져오기
-Test URL : http://15.164.248.209:20000/rest/getClosePriceHistory?symbol=ko
+Test URL : http://20.194.41.177:21000/rest/getClosePriceHistory?symbol=ko
 
 ```
 GET /rest/getClosePriceHistory
@@ -148,7 +148,7 @@ FAIL
 ***
 
 ### 뉴스 가져오기 
-Test URL : http://15.164.248.209:20000/rest/getNewsByTicker?ticker=ko
+Test URL : http://20.194.41.177:21000/rest/getNewsByTicker?ticker=ko
 
 ```
 GET /rest/getNewsByTicker
@@ -264,7 +264,7 @@ FAIL
 ***
 
 ### 재무정보 가져오기 
-Test URL : http://15.164.248.209:20000/rest/getFinanceInfo?ticker=ko
+Test URL : http://20.194.41.177:21000/rest/getFinanceInfo?ticker=ko
 
 ```
 GET /rest/getFinanceInfo
@@ -1628,7 +1628,7 @@ FAIL
 ***
 
 ### 배당킹 티커 리스트 가져오기 
-Test URL : http://15.164.248.209:20000/rest/getDividendKingTickerList
+Test URL : http://20.194.41.177:21000/rest/getDividendKingTickerList
 
 ```
 GET /rest/getDividendKingTickerList
@@ -1685,7 +1685,7 @@ SUCCESS
 ***
 
 ### 배당귀족 티커 리스트 가져오기 
-Test URL : http://15.164.248.209:20000/rest/getDividendAristocratsList
+Test URL : http://20.194.41.177:21000/rest/getDividendAristocratsList
 
 ```
 GET /rest/getDividendAristocratsList
@@ -1777,7 +1777,7 @@ SUCCESS
 ***
 
 ### 원달러 환율가져오기 
-Test URL : http://15.164.248.209:20000/rest/getKRWExchangeRate
+Test URL : http://20.194.41.177:21000/rest/getKRWExchangeRate
 
 ```
 GET /rest/getKRWExchangeRate
@@ -1817,7 +1817,7 @@ FAIL
 ```
 
 ### 티커 검색 
-Test URL : http://15.164.248.209:20000/rest/getRecommendKeyword?keyword=KO
+Test URL : http://20.194.41.177:21000/rest/getRecommendKeyword?keyword=KO
 
 ```
 GET /rest/getRecommendKeyword
@@ -1949,7 +1949,7 @@ FAIL
 
 
 ### 기업 요약 정보
-Test URL : http://15.164.248.209:20000/rest/getCompanySummaryInfo?symbol=KO
+Test URL : http://20.194.41.177:21000/rest/getCompanySummaryInfo?symbol=KO
 
 ```
 GET /rest/getCompanySummaryInfo
@@ -2043,7 +2043,7 @@ FAIL
 
 
 ### 기간별 배당정보 요청
-Test URL : http://15.164.248.209:20000/rest/getMontlyDividendsData?from_year=2020&from_month=8&to_year=2020&to_month=8
+Test URL : http://20.194.41.177:21000/rest/getMontlyDividendsData?from_year=2020&from_month=8&to_year=2020&to_month=8
 
 ```
 GET /rest/getMontlyDividendsData
@@ -2153,7 +2153,7 @@ FAIL
 
 
 ### 심볼 리스트로 배당일, 배당락일 등 정보 요청
-Test URL : http://15.164.248.209:20000/rest/getMultipleDividendsInfo?symbol_list=ko,aapl
+Test URL : http://20.194.41.177:21000/rest/getMultipleDividendsInfo?symbol_list=ko,aapl
 
 ```
 GET /rest/getMultipleDividendsInfo
@@ -2205,7 +2205,7 @@ FAIL
 ```
 
 ### 최근 종가
-Test URL : http://15.164.248.209:20000/rest/getLatestClosePrice?symbol=ko
+Test URL : http://20.194.41.177:21000/rest/getLatestClosePrice?symbol=ko
 
 ```
 GET /rest/getLatestClosePrice
@@ -2238,6 +2238,3 @@ FAIL
 }
 
 ```
-
-
-
