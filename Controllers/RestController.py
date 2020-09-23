@@ -5,7 +5,7 @@ from fake_useragent import UserAgent
 import requests
 import os
 import sys
-#import pandas_datareader as pdr
+import pandas_datareader as pdr
 import json
 #from bs4 import BeautifulSoup
 #import FinanceDataReader as fdr
@@ -24,7 +24,7 @@ RES_SUCCESS = 200 #성공
 # DB
 HOST = "0.0.0.0"
 USERNAME = "root"
-PASSWORD = "app"
+PASSWORD = "joorini"
 DB_NAME = "finance_db"
 
 

@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 from Controllers.RestController import RestController
 
-CRAWLING_SVR_PORT = 20000
+CRAWLING_SVR_PORT = 21000
 
 app = Flask(__name__)
 api = Api(app)
@@ -19,4 +19,4 @@ def after_request(response):
     return response
 
 if __name__ == '__main__':
-        app.run(host='0.0.0.0',port=CRAWLING_SVR_PORT , debug=True)
+        app.run(host='0.0.0.0',port=CRAWLING_SVR_PORT , debug=False)
