@@ -5,12 +5,12 @@ from fake_useragent import UserAgent
 import requests
 import os
 import sys
-import pandas_datareader as pdr
+#import pandas_datareader as pdr
 import json
-from bs4 import BeautifulSoup
-import FinanceDataReader as fdr
-from selenium import webdriver
-import calendar
+#from bs4 import BeautifulSoup
+#import FinanceDataReader as fdr
+#from selenium import webdriver
+#import calendar
 from datetime import datetime
 import pymysql
 
