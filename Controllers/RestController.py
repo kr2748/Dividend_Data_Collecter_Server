@@ -27,6 +27,9 @@ USERNAME = "root"
 PASSWORD = "joorini"
 DB_NAME = "finance_db"
 
+# SORT_MODE 
+SORT_MODE_BY_DIVIDENDS_DATE = "dividends_date"
+SORT_MODE_BY_PAYMENT_DATE = "payment_date"
 
 class RestController(Resource):
 
@@ -120,9 +123,18 @@ class RestController(Resource):
             from_month = request.args.get('from_month')
             to_year = request.args.get('to_year')
             to_month = request.args.get('to_month')
+            sort_mode = request.args.get('sort_mode')
 
             if from_year != None and from_month != None and to_year != None and to_month != None:
-                return self.getMontlyDividendsInfoFromDB(from_year, from_month, to_year, to_month)
+                print("sort_mode : {}".format(sort_mode))
+                if sort_mode == None:
+                    return self.getMontlyDividendsInfoFromDB(from_year, from_month, to_year, to_month)
+                else:
+
+                    if sort_mode == SORT_MODE_BY_DIVIDENDS_DATE or sort_mode == SORT_MODE_BY_PAYMENT_DATE:
+                        return self.getMontlyDividendsInfoFromDB(from_year, from_month, to_year, to_month, sort_mode)
+                    else:
+                        self.makeResultJson(RES_FAIL_PARAM_ERR)
             else :
                 return self.makeResultJson(RES_FAIL_PARAM_ERR)
 
@@ -471,15 +483,15 @@ class RestController(Resource):
         return self.makeResultJson(RES_SUCCESS, result_stocks_list)
 
     # 월별 배당정보 DB에서 가져오는 함수
-    def getMontlyDividendsInfoFromDB(self, from_year : int, from_month : int, to_year : int, to_month : int):
+    def getMontlyDividendsInfoFromDB(self, from_year : int, from_month : int, to_year : int, to_month : int, sort_mode : str = SORT_MODE_BY_DIVIDENDS_DATE):
 
         conn = pymysql.connect(host=HOST, user= USERNAME, password=PASSWORD, db=DB_NAME,charset='utf8')
         cursor = conn.cursor()
 
         result_dict = dict()
 
-        sql = "SELECT * FROM `finance_info` WHERE `dividends_date` BETWEEN '{}-{}-01' AND '{}-{}-31' LIMIT 0,1000;\
-        ".format(from_year, from_month, to_year, to_month)
+        sql = "SELECT * FROM `finance_info` WHERE `{}` BETWEEN '{}-{}-01' AND '{}-{}-31' LIMIT 0,1000;\
+        ".format(sort_mode,from_year, from_month, to_year, to_month)
 
         cursor.execute(sql)
         result = cursor.fetchall()
