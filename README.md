@@ -2043,7 +2043,7 @@ FAIL
 
 
 ### 기간별 배당정보 요청
-Test URL : http://20.194.41.177:21000/rest/getMontlyDividendsData?from_year=2020&from_month=8&to_year=2020&to_month=8
+Test URL : http://20.194.41.177:21000/rest/getMontlyDividendsData?from_year=2020&from_month=8&to_year=2020&to_month=8&sort_mode=dividends_date
 
 ```
 GET /rest/getMontlyDividendsData
@@ -2056,6 +2056,7 @@ GET /rest/getMontlyDividendsData
   "from_month" : "8",   //시작 달
   "to_year" : "2020",   //끝 연도
   "to_month" : "8"      //끝 달
+  "sort_mode" : "dividends_date" //소팅 기준 (optional). dividends_date(배당락일 기준) , payment_date(배당일 기준). default : dividends_date
 }
 ```
 
